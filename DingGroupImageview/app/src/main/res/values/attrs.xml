@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="storageView">
+        <attr name="usedRate" format="integer"/>
+        <attr name="totalText" format="string|reference"/>
+        <attr name="totalTextSize" format="dimension"/>
+        <attr name="leftText" format="string|reference"/>
+        <attr name="leftTextSize" format="dimension"/>
+        <attr name="rightText" format="string|reference"/>
+        <attr name="rightTextSize" format="dimension"/>
+        <attr name="st_radius" format="dimension"/>
+        <attr name="st_paddingRight" format="dimension"/>
+        <attr name="paddingTotalRectWidth" format="dimension"/>
+        <attr name="st_paddingTop" format="dimension"/>
+        <attr name="st_paddingBottom" format="dimension"/>
+        <attr name="paddingRectUsedHeight" format="dimension"/>
+        <attr name="paddingReclUsedWidth" format="dimension"/>
+        <attr name="paddingUsedRecrWidth" format="dimension"/>
+        <attr name="paddingRecrAvailableWidth" format="dimension"/>
+    </declare-styleable>
+</resources>
