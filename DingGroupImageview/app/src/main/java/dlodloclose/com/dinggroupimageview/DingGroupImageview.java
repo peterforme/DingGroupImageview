@@ -41,14 +41,10 @@ public class DingGroupImageview extends View {
     public DingGroupImageview(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        //test
-        names.add("华");
-        names.add("演");
-        names.add("蓉");
-        names.add("峻");
-
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setStrokeWidth(5);//设置画笔宽度
 
         TypedArray typedArray=context.obtainStyledAttributes(attrs, R.styleable.storageView);
         st_radius = typedArray.getDimension(R.styleable.storageView_st_radius, TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,30,getResources().getDisplayMetrics()));
@@ -59,8 +55,25 @@ public class DingGroupImageview extends View {
         totalBound = new Rect();
         mPaint.setTextSize(totalTextSize);
 
+
         typedArray.recycle();
     }
+
+    public void setNames(ArrayList<String> temp){
+        names.clear();
+        names.addAll(temp);
+        invalidate();
+    }
+
+    //获取名字的后几个字，num表示数量，例如num=2表示返回后两个字
+    private String getLast2Character(String name , int num){
+        if(name.length() <= num){
+            return name;
+        }else{
+            return name.substring( name.length() - num );
+        }
+    }
+
 
     //重写OnDraw（）函数，在每次重绘时自主实现绘图
     @Override
@@ -68,46 +81,120 @@ public class DingGroupImageview extends View {
         // TODO Auto-generated method stub
         super.onDraw(canvas);
 
-        mPaint.setColor(Color.RED);
-        mPaint.setStyle(Paint.Style.FILL);
-        mPaint.setStrokeWidth(5);//设置画笔宽度
-        //画圆弧
         RectF rectTmp = new RectF (0,0,2*st_radius,2*st_radius);
-        canvas.drawArc(rectTmp,0,90,true,mPaint);
 
-        mPaint.setColor(Color.BLUE);
-        canvas.drawArc(rectTmp,90,90,true,mPaint);
+        if(names == null || names.size() == 0){
+            mPaint.setColor(Color.RED);
+            //画圆弧
+            canvas.drawArc(rectTmp,0,360,true,mPaint);
+        }
+        else if(names.size() == 1){
+            mPaint.setColor(Color.RED);
+            //画圆弧
+            canvas.drawArc(rectTmp,0,360,true,mPaint);
 
-        mPaint.setColor(Color.BLACK);
-        canvas.drawArc(rectTmp,180,90,true,mPaint);
+            mPaint.setStrokeWidth(2);//设置画笔宽度
+            mPaint.setColor(Color.WHITE);
+            mPaint.setTextSize(totalTextSize);
 
-        mPaint.setColor(Color.GREEN);
-        canvas.drawArc(rectTmp,270,90,true,mPaint);
-
-        mPaint.setColor(Color.WHITE);
-        mPaint.setStrokeWidth(2);//设置画笔宽度
-        canvas.drawLine(0,st_radius,st_radius * 2,st_radius,mPaint);
-        canvas.drawLine(st_radius,0,st_radius,st_radius * 2,mPaint);
-
-        mPaint.setColor(Color.WHITE);
-        mPaint.setTextSize(totalTextSize);
-
-        if(names.size() >= 4) {
-            totalText = names.get(0);
+            totalText = getLast2Character( names.get(0) , 2);
             mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
-            canvas.drawText(totalText, st_radius / 5 * 4 - totalBound.width(), st_radius / 5 * 4, mPaint);
+            canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius + totalBound.height() / 2, mPaint);
 
-            totalText = names.get(1);
+        }else if(names.size() == 2){
+            mPaint.setColor(Color.RED);
+            //画圆弧
+            canvas.drawArc(rectTmp,0,180,true,mPaint);
+
+            mPaint.setColor(Color.BLUE);
+            canvas.drawArc(rectTmp,180,180,true,mPaint);
+
+            mPaint.setColor(Color.WHITE);
+            mPaint.setStrokeWidth(2);//设置画笔宽度
+            canvas.drawLine(0,st_radius,st_radius * 2,st_radius,mPaint);
+
+            mPaint.setColor(Color.WHITE);
+            mPaint.setTextSize(totalTextSize);
+
+            totalText = getLast2Character( names.get(0) , 2);
+            mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
+            canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius / 5 * 4 , mPaint);
+
+            totalText = getLast2Character( names.get(1) , 2);
+            mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
+            canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius / 5 * 6 + totalBound.height() , mPaint);
+
+        }else if(names.size() == 3){
+            mPaint.setColor(Color.RED);
+            //画圆弧
+            canvas.drawArc(rectTmp,0,90,true,mPaint);
+
+            mPaint.setColor(Color.BLUE);
+            canvas.drawArc(rectTmp,90,180,true,mPaint);
+
+
+            mPaint.setColor(Color.GREEN);
+            canvas.drawArc(rectTmp,270,90,true,mPaint);
+
+            mPaint.setColor(Color.WHITE);
+            mPaint.setStrokeWidth(2);//设置画笔宽度
+            canvas.drawLine(st_radius,st_radius,st_radius * 2,st_radius,mPaint);
+            canvas.drawLine(st_radius,0,st_radius,st_radius * 2,mPaint);
+
+            mPaint.setColor(Color.WHITE);
+            mPaint.setTextSize(totalTextSize);
+
+
+            totalText = getLast2Character( names.get(0) , 1);
+            mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
+            canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 6 + totalBound.height(), mPaint);
+
+            totalText = getLast2Character( names.get(1) , 1);
+            mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
+            canvas.drawText(totalText, st_radius / 5 * 4 - totalBound.width(), st_radius + totalBound.height() / 2, mPaint);
+
+            totalText = getLast2Character( names.get(2) , 1);
             mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
             canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 4, mPaint);
+        }
+        else if(names.size() >= 4) {
+            mPaint.setColor(Color.RED);
+            //画圆弧
+            canvas.drawArc(rectTmp,0,90,true,mPaint);
 
-            totalText = names.get(2);
+            mPaint.setColor(Color.BLUE);
+            canvas.drawArc(rectTmp,90,90,true,mPaint);
+
+            mPaint.setColor(Color.BLACK);
+            canvas.drawArc(rectTmp,180,90,true,mPaint);
+
+            mPaint.setColor(Color.GREEN);
+            canvas.drawArc(rectTmp,270,90,true,mPaint);
+
+            mPaint.setColor(Color.WHITE);
+            mPaint.setStrokeWidth(2);//设置画笔宽度
+            canvas.drawLine(0,st_radius,st_radius * 2,st_radius,mPaint);
+            canvas.drawLine(st_radius,0,st_radius,st_radius * 2,mPaint);
+
+            mPaint.setColor(Color.WHITE);
+            mPaint.setTextSize(totalTextSize);
+
+            totalText = getLast2Character( names.get(0) , 1);
+            mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
+            canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 6 + totalBound.height(), mPaint);
+
+            totalText = getLast2Character( names.get(1) , 1);
             mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
             canvas.drawText(totalText, st_radius / 5 * 4 - totalBound.width(), st_radius / 5 * 6 + totalBound.height(), mPaint);
 
-            totalText = names.get(3);
+            totalText = getLast2Character( names.get(2) , 1);
             mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
-            canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 6 + totalBound.height(), mPaint);
+            canvas.drawText(totalText, st_radius / 5 * 4 - totalBound.width(), st_radius / 5 * 4, mPaint);
+
+            totalText = getLast2Character( names.get(3) , 1);
+            mPaint.getTextBounds(totalText, 0, totalText.length(), totalBound);
+            canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 4, mPaint);
+
         }
 
 
@@ -129,7 +216,7 @@ public class DingGroupImageview extends View {
             width = measureWidth;
         } else
         {
-            width = measureWidth;
+            width = (int)(st_radius * 2 + 0.5);
         }
 
         if (measureHeightMode == MeasureSpec.EXACTLY)
@@ -137,11 +224,11 @@ public class DingGroupImageview extends View {
             height = measureHeight;
         } else
         {
-            height = measureHeight;
+            height = (int)(st_radius * 2 + 0.5);
         }
 
 
-        setMeasuredDimension((measureWidthMode == MeasureSpec.EXACTLY) ? measureWidth: width, (measureHeightMode == MeasureSpec.EXACTLY) ? measureHeight: height);
+        setMeasuredDimension( width,  height);
 
     }
 
