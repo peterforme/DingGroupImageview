@@ -84,12 +84,13 @@ public class DingGroupImageview extends View {
         RectF rectTmp = new RectF (0,0,2*st_radius,2*st_radius);
 
         if(names == null || names.size() == 0){
-            mPaint.setColor(Color.RED);
+
+            mPaint.setColor(getResources().getColor(R.color.third));
             //画圆弧
             canvas.drawArc(rectTmp,0,360,true,mPaint);
         }
         else if(names.size() == 1){
-            mPaint.setColor(Color.RED);
+            mPaint.setColor(getResources().getColor(R.color.third));
             //画圆弧
             canvas.drawArc(rectTmp,0,360,true,mPaint);
 
@@ -102,11 +103,11 @@ public class DingGroupImageview extends View {
             canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius + totalBound.height() / 2, mPaint);
 
         }else if(names.size() == 2){
-            mPaint.setColor(Color.RED);
+            mPaint.setColor(getResources().getColor(R.color.third));
             //画圆弧
             canvas.drawArc(rectTmp,0,180,true,mPaint);
 
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(getResources().getColor(R.color.second));
             canvas.drawArc(rectTmp,180,180,true,mPaint);
 
             mPaint.setColor(Color.WHITE);
@@ -125,15 +126,15 @@ public class DingGroupImageview extends View {
             canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius / 5 * 6 + totalBound.height() , mPaint);
 
         }else if(names.size() == 3){
-            mPaint.setColor(Color.RED);
+            mPaint.setColor(getResources().getColor(R.color.first));
             //画圆弧
             canvas.drawArc(rectTmp,0,90,true,mPaint);
 
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(getResources().getColor(R.color.second));
             canvas.drawArc(rectTmp,90,180,true,mPaint);
 
 
-            mPaint.setColor(Color.GREEN);
+            mPaint.setColor(getResources().getColor(R.color.third));
             canvas.drawArc(rectTmp,270,90,true,mPaint);
 
             mPaint.setColor(Color.WHITE);
@@ -158,17 +159,17 @@ public class DingGroupImageview extends View {
             canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 4, mPaint);
         }
         else if(names.size() >= 4) {
-            mPaint.setColor(Color.RED);
+            mPaint.setColor(getResources().getColor(R.color.first));
             //画圆弧
             canvas.drawArc(rectTmp,0,90,true,mPaint);
 
-            mPaint.setColor(Color.BLUE);
+            mPaint.setColor(getResources().getColor(R.color.second));
             canvas.drawArc(rectTmp,90,90,true,mPaint);
 
-            mPaint.setColor(Color.BLACK);
+            mPaint.setColor(getResources().getColor(R.color.third));
             canvas.drawArc(rectTmp,180,90,true,mPaint);
 
-            mPaint.setColor(Color.GREEN);
+            mPaint.setColor(getResources().getColor(R.color.fourth));
             canvas.drawArc(rectTmp,270,90,true,mPaint);
 
             mPaint.setColor(Color.WHITE);
