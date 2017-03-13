@@ -28,6 +28,11 @@ public class DingGroupImageview extends View {
     private int totalTextSize;
     private String totalText ;
 
+    private int firstColor;
+    private int secondColor;
+    private int thirdColor;
+    private int fourthColor;
+
     private ArrayList<String> names = new ArrayList<>();
 
     public DingGroupImageview(Context context) {
@@ -55,6 +60,11 @@ public class DingGroupImageview extends View {
         totalBound = new Rect();
         mPaint.setTextSize(totalTextSize);
 
+        //设置默认的颜色,如果需要在xml设置，可自行修改
+        firstColor = getResources().getColor(R.color.first);
+        secondColor = getResources().getColor(R.color.second);
+        thirdColor = getResources().getColor(R.color.third);
+        fourthColor = getResources().getColor(R.color.fourth);
 
         typedArray.recycle();
     }
@@ -62,6 +72,26 @@ public class DingGroupImageview extends View {
     public void setNames(ArrayList<String> temp){
         names.clear();
         names.addAll(temp);
+        invalidate();
+    }
+
+    public void setFirstColor(int firstColor) {
+        this.firstColor = firstColor;
+        invalidate();
+    }
+
+    public void setSecondColor(int secondColor) {
+        this.secondColor = secondColor;
+        invalidate();
+    }
+
+    public void setThirdColor(int thirdColor) {
+        this.thirdColor = thirdColor;
+        invalidate();
+    }
+
+    public void setFourthColor(int fourthColor) {
+        this.fourthColor = fourthColor;
         invalidate();
     }
 
@@ -85,12 +115,12 @@ public class DingGroupImageview extends View {
 
         if(names == null || names.size() == 0){
 
-            mPaint.setColor(getResources().getColor(R.color.third));
+            mPaint.setColor(firstColor);
             //画圆弧
             canvas.drawArc(rectTmp,0,360,true,mPaint);
         }
         else if(names.size() == 1){
-            mPaint.setColor(getResources().getColor(R.color.third));
+            mPaint.setColor(firstColor);
             //画圆弧
             canvas.drawArc(rectTmp,0,360,true,mPaint);
 
@@ -103,11 +133,11 @@ public class DingGroupImageview extends View {
             canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius + totalBound.height() / 2, mPaint);
 
         }else if(names.size() == 2){
-            mPaint.setColor(getResources().getColor(R.color.third));
+            mPaint.setColor(firstColor);
             //画圆弧
             canvas.drawArc(rectTmp,0,180,true,mPaint);
 
-            mPaint.setColor(getResources().getColor(R.color.second));
+            mPaint.setColor(secondColor);
             canvas.drawArc(rectTmp,180,180,true,mPaint);
 
             mPaint.setColor(Color.WHITE);
@@ -126,15 +156,15 @@ public class DingGroupImageview extends View {
             canvas.drawText(totalText, st_radius  - totalBound.width() / 2, st_radius / 5 * 6 + totalBound.height() , mPaint);
 
         }else if(names.size() == 3){
-            mPaint.setColor(getResources().getColor(R.color.first));
+            mPaint.setColor(firstColor);
             //画圆弧
             canvas.drawArc(rectTmp,0,90,true,mPaint);
 
-            mPaint.setColor(getResources().getColor(R.color.second));
+            mPaint.setColor(secondColor);
             canvas.drawArc(rectTmp,90,180,true,mPaint);
 
 
-            mPaint.setColor(getResources().getColor(R.color.third));
+            mPaint.setColor(thirdColor);
             canvas.drawArc(rectTmp,270,90,true,mPaint);
 
             mPaint.setColor(Color.WHITE);
@@ -159,17 +189,17 @@ public class DingGroupImageview extends View {
             canvas.drawText(totalText, st_radius / 5 * 6, st_radius / 5 * 4, mPaint);
         }
         else if(names.size() >= 4) {
-            mPaint.setColor(getResources().getColor(R.color.first));
+            mPaint.setColor(firstColor);
             //画圆弧
             canvas.drawArc(rectTmp,0,90,true,mPaint);
 
-            mPaint.setColor(getResources().getColor(R.color.second));
+            mPaint.setColor(secondColor);
             canvas.drawArc(rectTmp,90,90,true,mPaint);
 
-            mPaint.setColor(getResources().getColor(R.color.third));
+            mPaint.setColor(thirdColor);
             canvas.drawArc(rectTmp,180,90,true,mPaint);
 
-            mPaint.setColor(getResources().getColor(R.color.fourth));
+            mPaint.setColor(fourthColor);
             canvas.drawArc(rectTmp,270,90,true,mPaint);
 
             mPaint.setColor(Color.WHITE);

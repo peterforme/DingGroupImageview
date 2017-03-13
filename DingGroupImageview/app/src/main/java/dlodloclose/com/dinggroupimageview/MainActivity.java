@@ -42,15 +42,25 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> names = new ArrayList<>();
                 names.add("彭天文");
                 dingGroupImageview.setNames(names);
+                dingGroupImageview.setFirstColor(getResources().getColor(R.color.fourth));
 
                 names.add("寿文斌");
                 dingGroupImageview2.setNames(names);
+                dingGroupImageview2.setFirstColor(getResources().getColor(R.color.fourth));
+                dingGroupImageview2.setSecondColor(getResources().getColor(R.color.first));
 
                 names.add("谢明敏");
                 dingGroupImageview3.setNames(names);
+                dingGroupImageview3.setFirstColor(getResources().getColor(R.color.fourth));
+                dingGroupImageview3.setSecondColor(getResources().getColor(R.color.second));
+                dingGroupImageview3.setThirdColor(getResources().getColor(R.color.first));
 
                 names.add("吴秋玉");
                 dingGroupImageview4.setNames(names);
+                dingGroupImageview4.setFirstColor(getResources().getColor(R.color.fourth));
+                dingGroupImageview4.setSecondColor(getResources().getColor(R.color.third));
+                dingGroupImageview4.setThirdColor(getResources().getColor(R.color.second));
+                dingGroupImageview4.setFourthColor(getResources().getColor(R.color.first));
             }
         });
 
